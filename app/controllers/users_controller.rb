@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
       # 更新に成功したときの処理
       redirect_to @user, notice: 'update to your profile!'
     else

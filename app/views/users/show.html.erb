@@ -3,7 +3,21 @@
   <%= @user.name %>
 </h1>
 
-<div>ここにプロフィールを表示</div>
-  <%= @user.email %>
-  <%= @user.address %>
-  <%= @user.profile %>
+<div class="col-md-6 col-md-offset-3">
+  <table class="table">
+    <tbody>
+      <tr>
+        <th scope="row" class="text-right">email</th>
+        <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <th scope="row" class="text-right">address</th>
+        <td><%= @user.address %></td>
+      </tr>
+      <tr>
+        <th scope="row" class="text-right">profile</th>
+        <td><%= @user.profile %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
