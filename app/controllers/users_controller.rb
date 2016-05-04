@@ -35,6 +35,12 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+  
+  def followings
+  end
+  
+  def followers
+  end
 
   private
 
