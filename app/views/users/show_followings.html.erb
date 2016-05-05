@@ -24,7 +24,7 @@
   <div class="col-md-8">
     <h3>followings(<%= @user.following_users_count %>)</h3>
     <ul class="follow">
-    <% @user.following_users.each do |user| %>
+    <% @users.each do |user| %>
       <li class="clearfix"><%= link_to gravatar_for(user, size: 30), user %><%= link_to user.name, user_path(user) %></li>
     <% end %>
     </ul>
