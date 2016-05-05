@@ -7,7 +7,7 @@
         <%= @user.name %>
       </h1>
       <span><%= link_to "view my profile", @user %></span>
-      <span><b>Microposts:</b> <%= @user.microposts.count %></span>
+      <span>Microposts: <%= @user.microposts.count %></span>
     </section>
     <section class="stats">
       <%= render 'shared/stats' %>
@@ -22,9 +22,10 @@
   </aside>
 
   <div class="col-md-8">
-    <ul>
-    <% @user.follower.each do |user| %>
-      <li><%= user.name %><%= link_to '詳細', user_path(user) %></li>
+    <h3>followers(<%= @user.follower_users_count %>)</h3>
+    <ul class="follow">
+    <% @user.follower_users.each do |user| %>
+      <li class="clearfix"><%= link_to gravatar_for(user, size: 30), user %><%= link_to user.name, user_path(user) %></li>
     <% end %>
     </ul>
   </div>

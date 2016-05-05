@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_secure_password
   
   has_many :microposts
+  
+  #relationships テーブルで　フォローしている人を探すためのもの
   has_many :following_relationships, class_name:  "Relationship",
                                      foreign_key: "follower_id",
                                      dependent:   :destroy
@@ -19,8 +21,6 @@ class User < ActiveRecord::Base
   has_many :following_users, through: :following_relationships, source: :followed
   has_many :follower_users, through: :follower_relationships, source: :follower
 
-  has_many :following, through: :following_relationships,  source: :followed
-  has_many :follower, through: :follower_relationships, source: :follower
 
   # 他のユーザーをフォローする
   def follow(other_user)
@@ -36,6 +36,14 @@ class User < ActiveRecord::Base
   # あるユーザーをフォローしているかどうか？
   def following?(other_user)
     following_users.include?(other_user)
+  end
+  
+  def following_users_count
+    following_users.count
+  end
+  
+  def follower_users_count
+    follower_users.count
   end
 
 end
