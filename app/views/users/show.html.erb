@@ -6,7 +6,31 @@
         <%= @user.name %>
       </h1>
     </section>
+    <section class="stats">
+      <%= render 'shared/stats' %>
+    </section>
+    <section class="following_users">
+      <h2>followings</h2>
+      <% if @following_users.any? %>
+        <div class="user_avatars">
+          <% @following_users.each do |user| %>
+            <%= link_to gravatar_for(user, size: 30), user %>
+          <% end %>
+        </div>
+      <% end %>
+    </section>
+    <section class="follower_users">
+      <h2>followers</h2>
+      <% if @follower_users.any? %>
+        <div class="user_avatars">
+          <% @follower_users.each do |user| %>
+            <%= link_to gravatar_for(user, size: 30), user %>
+          <% end %>
+        </div>
+      <% end %>
+    </section>
   </aside>
+  
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>

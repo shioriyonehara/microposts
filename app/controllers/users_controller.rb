@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
-#  before_action :redirect_to_root, :if => :signed_in?, only: [:edit, :update]
-  before_action :logged_in_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:edit, :update, :destroy, :following, :followers]
   before_action :correct_user,   only: [:edit, :update]
   
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.order(created_at: :desc)
+    @following_users = @user.following_users
+    @follower_users = @user.follower_users
   end
   
   def new
@@ -34,6 +35,20 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def followings
+    @title = "Following"
+    @user  = User.find(params[:id])
+    @users = @user.following_users
+    render 'show_followings'
+  end
+
+  def followers
+    @title = "Followers"
+    @user  = User.find(params[:id])
+    @users = @user.follower_users
+    render 'show_followers'
   end
 
   private
