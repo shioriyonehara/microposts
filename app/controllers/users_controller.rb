@@ -7,6 +7,9 @@ class UsersController < ApplicationController
     @microposts = @user.microposts.order(created_at: :desc)
     @following_users = @user.following_users
     @follower_users = @user.follower_users
+    @retweet_micropost = Micropost.find(params[:id])
+    @retweet_id = @retweet_micropost.id
+    @retweet_content = @retweet_micropost.content
   end
   
   def new

@@ -12,6 +12,20 @@ class MicropostsController < ApplicationController
     end
   end
   
+  def retweet
+    #@micropost = current_user.microposts.find_by(id: params[:id])
+    #return redirect_to root_url if @micropost.nil?
+    @retweet_micropost = Micropost.find(params[:id])
+    @retweet_id = @retweet_micropost.id
+    @retweet_content = @retweet_micropost.content
+    # ↓ログイン中のユーザの投稿としてリツイート記事を作成保存する
+    @retweet = current_user.microposts.create!(user_id: current_user.id, 
+                                               retweet_id: @retweet_id,
+                                               content: @retweet_content)
+    flash[:success] = "Micropost retweet!"
+    redirect_to root_url
+  end
+  
   def destroy
     @micropost = current_user.microposts.find_by(id: params[:id])
     return redirect_to root_url if @micropost.nil?
